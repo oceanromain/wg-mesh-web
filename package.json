@@ -1,0 +1,18 @@
+{
+  "name": "wg-mesh-web",
+  "version": "1.0.0",
+  "description": "纯浏览器 WireGuard full-mesh 配置生成器（wg-meshconf 思路的 Web 重写）",
+  "type": "module",
+  "license": "MIT",
+  "homepage": "https://github.com/oceanromain/wg-mesh-web",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/oceanromain/wg-mesh-web.git"
+  },
+  "scripts": {
+    "test": "node test/golden.mjs",
+    "build:public": "node test/build-public.mjs",
+    "serve": "python3 -m http.server 8899 --bind 127.0.0.1"
+  },
+  "engines": { "node": ">=18" }
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WireGuard Mesh 配置生成器</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="logo">🛡️</span>
+    <div>
+      <h1>WireGuard Mesh 配置生成器</h1>
+      <p class="sub">纯浏览器本地运行 · 私钥/PSK 不出本机 · 兼容 wg-meshconf 拓扑（已规避 endpoint 重复端口 / keepalive 反向两坑）</p>
+    </div>
+  </div>
+  <div class="actions">
+    <button id="btn-template" class="btn">载入示例拓扑</button>
+    <button id="btn-add" class="btn">＋ 添加节点</button>
+    <button id="btn-generate" class="btn btn-primary">⚡ 生成配置</button>
+    <button id="btn-rotate-psk" class="btn btn-warn" title="为现有节点对重新生成全部 PSK">轮换 PSK</button>
+    <button id="btn-zip" class="btn" disabled>下载全部 (.zip)</button>
+    <button id="btn-export" class="btn">导出 JSON</button>
+    <label class="btn file-btn">导入 JSON<input type="file" id="file-import" accept="application/json,.json" hidden></label>
+    <button id="btn-clear" class="btn btn-danger">清空</button>
+  </div>
+</header>
+
+<main>
+  <div id="banner" class="banner hidden"></div>
+
+  <section>
+    <h2 class="sec-title">节点拓扑 <span id="peer-count" class="badge">0</span></h2>
+    <div id="peers" class="peer-grid"></div>
+    <p class="hint">Endpoint 只填主机名/IP（<b>不要带端口</b>，端口自动取该节点 ListenPort）；AllowedIPs 每行一条，节点隧道地址会自动加入。</p>
+  </section>
+
+  <section id="result-section" class="hidden">
+    <h2 class="sec-title">生成结果 <span class="hint">二维码内容即完整 .conf，WireGuard App 可直接扫码导入</span></h2>
+    <div id="results" class="result-grid"></div>
+  </section>
+</main>
+
+<footer class="footer">
+  <label class="remember">
+    <input type="checkbox" id="chk-persist"> 在本机浏览器记住拓扑与密钥（localStorage，含私钥/PSK，默认关闭）
+  </label>
+  <span>离线静态页面 · 断网可用 · 生成密钥基于 TweetNaCl (X25519)</span>
+</footer>
+
+<script src="vendor/nacl.min.js"></script>
+<script src="vendor/qrcode.js"></script>
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

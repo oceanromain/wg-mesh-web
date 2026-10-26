@@ -1,0 +1,6 @@
+cross-out/
+node_modules/
+.DS_Store
+test/scan/
+*.png
+dist-public/
